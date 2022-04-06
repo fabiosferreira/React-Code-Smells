@@ -1,0 +1,23 @@
+cff-version: 1.0.0
+message: 'If you use this catalog in your work, please cite it as below.'
+authors:
+  - given-names: Fabio
+    family-names: Ferreira
+    email: fabio.ferreira@ifsudestemg.edu.br
+    affiliation: UFMG
+    orcid: 'https://orcid.org/0000-0003-4485-3219'
+  - given-names: Marco Tulio
+    family-names: Valente
+    email: mtvalente@gmail.com
+    affiliation: UFMG
+    orcid: 'https://orcid.org/0000-0002-8180-7548'
+title: 'Catalog of React-specific code smells'
+version: '1.0'
+date-released: '2022-04-06'
+url: 'https://github.com/fabiosferreira/React-Code-Smells'
+keywords:
+  - react
+  - code smells
+  - JavaScript
+  - Anti-Patterns,
+license: MIT
