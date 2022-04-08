@@ -1,4 +1,4 @@
-# Catalog of React-specific code smells
+# React Code Smells
 
 ## Table of Contents
 
