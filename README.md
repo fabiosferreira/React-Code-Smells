@@ -127,16 +127,20 @@ On the other hand, when developers use controlled components, all data is stored
 
 ### JSX outside the render method
 
-The ``render`` method is the only method that is mandatory in a class component. It provides the JSX template for all UI elements. Normally, we assume that all JSX code is confined in the ``render`` method. The existence of JSX code in other methods indicates that the component is assuming too many responsibilities and providing a complex UI element. As a result, it is more difficult to reuse the component in other pages or apps. For example, in the following ``Gallery`` component, we have three ``render`` methods: one to render an ``Image``, one to render a ``Comment``, and the main ``render`` method, which calls the previous ones. However, suppose we want to handle just a ``Comment``. In this case, it is impossible to rely on ``Gallery`` since this component also provides other visual elements, such as the ones needed to represent an ``Image``.
+The ``render`` method is the only method that is mandatory in a class component. It provides the JSX template for all UI elements. Normally, we assume that all JSX code is confined in the ``render`` method. The existence of JSX code in other methods indicates that the component is assuming too many responsibilities and providing a complex UI element. As a result, it is more difficult to reuse the component in other pages or apps. For example, in the following ``Gallery`` component, we have three ``render`` methods: one to render an ``Image`` (that calls ``renderComment()``), the method that only renders ``Comments``, and the main ``render`` method (that calls ``renderImage()``). However, suppose we want to handle just a ``Comment``. In this case, it is impossible to rely on ``Gallery`` since this component also provides other visual elements, such as the ones needed to represent an ``Image``.
 
 ```jsx
 class Gallery extends React.Component {
-   renderImage() {
-      return (<div> ... </div>);
+   renderComment() {
+      return (<div> ... </div>)
    }
 
-   renderComment() {
-      return (<div> ... </div>);
+   renderImage() {
+      return (
+        <div> 
+            ...
+            {this.renderComment()}
+        </div>)
    }
 
    render() {
