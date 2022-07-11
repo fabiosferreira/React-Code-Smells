@@ -159,7 +159,7 @@ In summary, the presence of JSX code in multiple methods indicates a complex UI 
 
 ## Partially Novel Smells
 
-We classified two smells in our catalog as partially novel: Prop Drilling and Too Many Props. For example, Ousterhout et. al. mention a design red flag called Pass-Through Methods, i.e., a method that does nothing but pass its arguments to another method with a similar signature. However, in our case, Prop Drilling does not relate to methods but components. We also consider that Too Many Props is similar to Data Class and Large Class proposed by Fowler. A Data Class has mostly data and setter and getter methods. A Large Class is a class with several responsibilities. On the other hand, Too Many Props designates a component with a large number of props. 
+We classified a single smell in our catalog as partially novel: Prop Drilling. For example, Ousterhout et. al. mention a design red flag called Pass-Through Methods, i.e., a method that does nothing but pass its arguments to another method with a similar signature. However, in our case, Prop Drilling does not relate to methods but components. As a second observation, Prop Drilling resembles to some degree a Middle Man class, i.e., a class that delegates most of its work to other classes. However, Middle Man classes by definition are anemic in the terms of behavior and data, which is not the case of Prop Drilling. In other words, a complex component can also be used to pass through properties to its child components. 
 
 ### Prop Drilling
 
@@ -173,41 +173,10 @@ As the codebase increases, Prop Drilling makes it challenging to figure out wher
 
 > _If you only want to avoid passing some props through many levels, component composition is often a simpler solution than context._
 
-### Too Many Props
-
-Props (React stands for properties) are arguments passed to components via HTML attributes. However, it is hard to understand components with a long list of props. For example, consider the ``Comment`` component used as an example in React’s documentation. This component has many properties, including the four properties presented in the following code:
-
-```jsx
-function Comment(props) {
-  return (
-    <div>
-      <div>{props.name}</div>
-      <img src={props.avatarUrl}/>
-      <div>{props.text} </div>
-      <div>{props.date}</div>
-      // other props
-    </div>
-  );
-}
-```
-
-To reduce the number of props handled by ``Comment``, we can extract the props related to avatars (i.e., ``name`` and ``avatarUrl``) to a new component, called ``Avatar``. Then, ``Comment`` just references this new component, as in the following code:
-
-```jsx
-function Comment(props) {
-  return (
-    <div>
-      <Avatar avatar={props.avatar} />
-      <div>{props.text} </div>
-      <div>{props.date}</div>
-    </div>
-  );
-}
-```
 
 ## Traditional Smells
 
-In the grey literature and the interviews with developers, we identified five smells that are similar to traditional smells: Inheritance instead of Composition (since the inverse relation is considered a good object-oriented principle), Duplicated Component (which is a particular case of Duplicated Code), Large File, Large Component (which can be considered a particular case of the traditional Large Class), and Low Cohesion.
+In the grey literature and the interviews with developers, we identified six smells that are similar to traditional smells: Inheritance instead of Composition (since the inverse relation is considered a good object-oriented principle), Duplicated Component (which is a particular case of Duplicated Code), Large File, Large Component (which can be considered a particular case of the traditional Large Class), and Low Cohesion. We also consider that Too Many Props is similar to Data Class and Large Class proposed by Martin Fowler. A Data Class has mostly data and only setter and getter methods. A Large Class is a class with several responsibilities. On the other hand, Too Many Props designates a component with a large number of props. Essentially, this smell is very similar to the well-kwon Long Parameter List smell, proposed by Fowler. Just to clarify, in React, properties designates the parameters passed into components.
 
 ### Inheritance instead of Composition
 
@@ -273,6 +242,38 @@ function Opinion(props) {
   return (
     <div>
       <User user={props.user} />
+      <div>{props.text} </div>
+      <div>{props.date}</div>
+    </div>
+  );
+}
+```
+
+### Too Many Props
+
+Props (React stands for properties) are arguments passed to components via HTML attributes. However, it is hard to understand components with a long list of props. For example, consider the ``Comment`` component used as an example in React’s documentation. This component has many properties, including the four properties presented in the following code:
+
+```jsx
+function Comment(props) {
+  return (
+    <div>
+      <div>{props.name}</div>
+      <img src={props.avatarUrl}/>
+      <div>{props.text} </div>
+      <div>{props.date}</div>
+      // other props
+    </div>
+  );
+}
+```
+
+To reduce the number of props handled by ``Comment``, we can extract the props related to avatars (i.e., ``name`` and ``avatarUrl``) to a new component, called ``Avatar``. Then, ``Comment`` just references this new component, as in the following code:
+
+```jsx
+function Comment(props) {
+  return (
+    <div>
+      <Avatar avatar={props.avatar} />
       <div>{props.text} </div>
       <div>{props.date}</div>
     </div>
