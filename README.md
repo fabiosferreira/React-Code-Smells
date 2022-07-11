@@ -163,17 +163,15 @@ We classified two smells in our catalog as partially novel: Prop Drilling and To
 
 ### Prop Drilling
 
-Props drilling refers to the practice of passing props through multiple components in order to reach a particular component that needs the property. Therefore, the intermediate components act only as a bridge to deliver the data to the target component. For example, consider a ``Gallery`` that renders images and allows comments in each one (see the next code). First,  ``Gallery`` renders ``Image`` passing the ``user`` and ``avatar`` props. Then, the ``Image`` renders the ``Comment`` components, also passing the ``user`` and ``avatar`` props. Finally, ``Comment`` renders ``Author``, passing again the ``user`` and ``avatar`` props. In other words, ``Author`` is the only component that really needs to use these props. 
+Props drilling refers to the practice of passing props through multiple components in order to reach a particular component that needs the property. Therefore, the intermediate components act only as a bridge to deliver the data to the target component. For example, consider an App to create a ``Gallery`` that renders images and allows comments in each one (see Figure bellow). First, the App renders ``Gallery`` passing the user and avatar props. Then, the ``Image`` renders the ``Comment`` components, also passing the ``user`` and ``avatar`` props. Finally, ``Comment`` renders ``Author``, passing again the ``user`` and ``avatar`` props. In other words, ``Author`` is the only component that really needs to use these props. 
 
-```jsx
-<Gallery user={user} avatar={avatarSize} />
-<Image user={user} avatar={avatarSize} />
-<Comment user={user} avatar={avatarSize} >
-	<Author user={user} avatar={avatarSize} />
-</Comment>
-```
+<img src="img/prop_drilling.png" alt="Example of Prop Drilling (code smell)" title='Example of Prop Drilling (code smell)' width="65%"/>
 
-As the codebase increases, Prop Drilling makes it challenging to figure out where the data is initialized, updated, or used. Furthermore, it results in tightly coupled components. On the other hand, there are alternatives to avoid prop drillings, such as component composition and Context API.
+<!-- ![Example of Prop Drilling (code smell)](img/prop_drilling.png?raw=true "Example of Prop Drilling (code smell)"){:height="50%" width="50%"} -->
+
+As the codebase increases, Prop Drilling makes it challenging to figure out where the data is initialized, updated, or used. Furthermore, it results in tightly coupled components. On the other hand, there are alternatives to avoid prop drillings, such as component composition and Context API. Since each component is usually in a separate file, in our ``Gallery`` example (see Figure), there are five different files to check for property updates, including, Author.jsx, Comment.jsx, Image.jsx, Gallery.jsx, and the file that calls the ``Gallery`` component, App.jsx. Moreover, Prop Drilling results in tightly coupled components. For example, whenever the Author component needs more props from the top, all the intermediate levels must be updated. Finally, it is worth mentioning that React documentation recommends using component composition:
+
+> _If you only want to avoid passing some props through many levels, component composition is often a simpler solution than context._
 
 ### Too Many Props
 
