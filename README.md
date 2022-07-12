@@ -11,10 +11,10 @@
   * [JSX outside the render method](#jsx-outside-the-render-method)
 * __[Partially Novel Smells](__partially-smells)__
   * [Prop Drilling](#prop-drilling)
-  * [Too Many Props](#too-many-props)
 * __[Traditional Smells](traditional-smells)__
   * [Inheritance instead of Composition](#inheritance-instead-of-composition)
   * [Duplicated Component](#duplicated-component)
+  * [Too Many Props](#too-many-props)
   * [Large Component](#large-component)
   * [Large Files](#large-files)
   * [Low Cohesion](#low-cohesion)
