@@ -1,3 +1,5 @@
+<div align="justify">
+
 # React Code Smells
 
 ## Table of Contents
@@ -309,3 +311,5 @@ Please feel free to make pull requests and suggestions ([Issues][Issues] tab).
 [ASERG]: http://aserg.labsoft.dcc.ufmg.br/
 [Issues]: https://github.com/fabiosferreira/React-Code-Smells/issues
 [eslint-plugin-react]: https://github.com/yannickcr/eslint-plugin-react
+
+</div>
